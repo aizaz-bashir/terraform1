@@ -30,9 +30,10 @@ jobs:
       run: terraform plan
 
     - name: Terraform apply
-      uses: hashicorp/terraform-github-action@master
-       
+      uses: hashicorp/terraform-github-actions@master
       with: 
-        args:
-          apply-auto-approve
+        tf_actions_version: "latest"
+        tf_actions_subcommand: "apply"
+        tf_actions_working_dir: "."
+        tf_actions_comment: "true"
       
