@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
 
-  jobs:
+jobs:
   terraform:
     name: 'Terraform'
     env:
@@ -17,20 +17,17 @@ permissions:
     runs-on: ubuntu-latest
     environment: production
 
-steps:
+    steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
 
-      Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    # Initialicreating initial filese, downloading modules, etc.
     - name: Terraform Init
-      uses: hashicorp/terraform-github-action@master
       run: terraform init
 
     - name: Terraform plan
-      uses: hashicorp/terraform-github-action@master
       run: terraform plan
 
     - name: Terraform apply
-      uses: hashicorp/terraform-github-action@master
       run: terraform apply
