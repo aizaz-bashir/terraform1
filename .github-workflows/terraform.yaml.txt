@@ -1,0 +1,36 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+  jobs:
+  terraform:
+    name: 'Terraform'
+    env:
+     AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOPS_ACCESS_KEY_ID}}
+     AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOPS_SECRET_ACCESS_KEY}}
+    runs-on: ubuntu-latest
+    environment: production
+
+steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
+      Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-action@master
+      run: terraform init
+
+    - name: Terraform plan
+      uses: hashicorp/terraform-github-action@master
+      run: terraform plan
+
+    - name: Terraform apply
+      uses: hashicorp/terraform-github-action@master
+      run: terraform apply
